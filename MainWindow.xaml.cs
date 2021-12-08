@@ -2,6 +2,7 @@
 using SharpOSC;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,20 +15,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace OSC_Test
 {
-    /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class MainWindow : Window
     {
+        DispatcherTimer dt;
         public MainWindow()
         {
+            
             InitializeComponent();
-     
+            dt = new DispatcherTimer();
+            dt.Interval = TimeSpan.FromSeconds(5);
+            dt.Tick += Dt_Tick;
+            dt.Start();
 
-            OSCReceiverHelper.Instance.Test();
+        }
+
+        private void Dt_Tick(object sender, EventArgs e)
+        {
+            OSCSenderHelper.Instance.SendAll();
         }
     }
 }
