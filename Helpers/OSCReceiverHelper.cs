@@ -23,8 +23,8 @@ namespace OSC_Test.Helpers
         {
             HandleOscPacket cb = delegate (OscPacket packet)
             {
-                var msg = ((OscBundle)packet).Messages[0];
-                Console.WriteLine(msg.Arguments[0].ToString());
+                var msg = ((OscMessage)packet).Arguments[0].ToString();
+                Console.WriteLine(msg);
             }; 
             var l1 = new UDPListener(10001, cb);
         }

@@ -21,21 +21,12 @@ namespace OSC_Test
 {
     public partial class MainWindow : Window
     {
-        DispatcherTimer dt;
         public MainWindow()
         {
-            
-            InitializeComponent();
-            dt = new DispatcherTimer();
-            dt.Interval = TimeSpan.FromSeconds(5);
-            dt.Tick += Dt_Tick;
-            dt.Start();
+
+            OSCReceiverHelper.Instance.Start();
 
         }
 
-        private void Dt_Tick(object sender, EventArgs e)
-        {
-            OSCSenderHelper.Instance.SendAll();
-        }
     }
 }
