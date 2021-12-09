@@ -20,8 +20,8 @@ namespace OSC_Test.Helpers
 
         public void Send()
         {
-
             var sender = new SharpOSC.UDPSender("192.168.0.", 55555);
+            var sender = new SharpOSC.UDPSender("192.168.0.21", 10001);
             var msg = new SharpOSC.OscMessage("/test/", 23.42f);
             sender.Send(msg);
         }
@@ -30,12 +30,18 @@ namespace OSC_Test.Helpers
         {
             
             var list = SampleData.Instance.ips;
-          foreach(var item in list)
+            var rd = new Random().Next(0, 4);
+            for (int i=3;i<253;i++)
             {
-                var sender = new SharpOSC.UDPSender(item, 10001);
-                var rd = new Random().Next(0, 4);
-                var msg = new SharpOSC.OscMessage("/test/", rd);
-                sender.Send(msg);
+                try
+                {
+                    var sender = new SharpOSC.UDPSender($"192.168.0.{i}", 10001);
+                    var msg = new SharpOSC.OscMessage("/test/", rd);
+                    sender.Send(msg);
+                }catch(Exception e)
+                {
+                    
+                }
             }
         }
     }
