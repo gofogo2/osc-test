@@ -20,7 +20,6 @@ namespace OSC_Test.Helpers
 
         public void Send()
         {
-            var sender = new SharpOSC.UDPSender("192.168.0.", 55555);
             var sender = new SharpOSC.UDPSender("192.168.0.21", 10001);
             var msg = new SharpOSC.OscMessage("/test/", 23.42f);
             sender.Send(msg);
