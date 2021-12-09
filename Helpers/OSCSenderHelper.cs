@@ -18,10 +18,10 @@ namespace OSC_Test.Helpers
             }
         }
 
-        public void Send()
+        public void Send(string ip, object param)
         {
             var sender = new SharpOSC.UDPSender("192.168.0.21", 10001);
-            var msg = new SharpOSC.OscMessage("/test/", 23.42f);
+            var msg = new SharpOSC.OscMessage("/test/", param);
             sender.Send(msg);
         }
 
